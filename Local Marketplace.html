@@ -17,6 +17,11 @@
             --primary: #059669;
             --light-primary-bg: #e6fef7;
             --shadow-elevated: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --background: #ffffff;
+            --foreground: #1f2937;
+            --secondary: #ea580c;
+            --badge-bg: #f97316;
+            --badge-color: #ffffff;
         }
 
         body {
@@ -33,6 +38,177 @@
             padding-left: 1rem;
             padding-right: 1rem;
         }
+        /* 1. NAVIGATION BAR */
+        .navigation {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1100px;
+            z-index: 100;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: white;
+            text-decoration: none;
+            padding: 0 1rem;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 120%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            min-width: 200px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 20;
+            padding: 0.5rem;
+            list-style: none;
+        }
+        .dropdown-menu li a {
+            display: block;
+            border-radius: 8px;
+            width: 100%;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hamburger-menu { display: none; }
+        .mute-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 20px;
+            padding: 0.4rem 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-left: 0.75rem;
+        }
+        .mute-btn:hover { background: rgba(255,255,255,0.3); }
+
+        /* 2. HERO SECTION */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.3) 0%, rgba(2, 8, 23, 0.7) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 4;
+            padding: 2rem;
+        }
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+        }
+        .hero-title-highlight { color: #2dd4bf; }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 1.5rem auto;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .slideshow-container .mySlides { display: none; }
+        .slideshow-container .fade {
+            animation-name: fade;
+            animation-duration: 2s;
+        }
+        @keyframes fade {
+            from { opacity: .4 } to { opacity: 1 }
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 4. SCROLLABLE CONTAINER & CARDS */
+        .scroll-container {
+            overflow-x: unset;
+            padding-bottom: 1.5rem;
+        }
+        #destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+
         
         /* 1. Section Header Styles */
         .section-padding {
@@ -259,11 +435,80 @@
                 width: 100%;
             }
         }
+        html { scroll-behavior: smooth; }
+        .scroll-down-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bounceDown 2s infinite;
+        }
+        .scroll-down-indicator:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
+        }
+        .scroll-down-indicator svg {
+            color: white;
+            stroke-width: 1.5;
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(10px); opacity: 1; }
+        }
     </style>
 </head>
 <body>
-    <section class="section-padding">
-        <div class="container">
+
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">Jharkhand Tourism</a>
+            <button id="mute-btn" class="mute-btn">Mute</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" class="nav-link active">Destinations</a></li>
+                 <li class="dropdown">
+                            <a href="#experiences" class="nav-link">Experiences <span style="font-size:1.1em;vertical-align:middle;">&#9662;</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#revolutionary-features" class="nav-link">Revolutionary Features</a></li>
+                                <li><a href="transpotation.html" class="nav-link">Transportation</a></li>
+                                <li><a href="Local Marketplace.html" class="nav-link">Marketplace</a></li>
+                                <li><a href="interactivemap.html" class="nav-link">Interactive map</a></li>
+                            </ul>
+                        </li>
+                <li><a href="#" class="nav-link">Marketplace</a></li>
+                <li><a href="#" class="nav-link">Plan Trip</a></li>
+                <li><a href="main.html" class="nav-link">Home</a></li>
+            </ul>
+             <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    
+    <section id="home" class="hero-section">
+            <div class="hero-background">
+                <div class="slideshow-container">
+                    <video id="hero-video" autoplay  loop preload="auto" playsinline style="width:100%; height: 100vh; object-fit: cover;">
+                        <source src="M2video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+    </section>
+
+    <div style="text-align:center; position: absolute; bottom: 30px; width: 100%; z-index: 5;">
+                <a href="#marketplace-section" class="scroll-down-indicator" aria-label="Scroll Down">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                </a>
+            </div>
+
+        <main div  class="container" id="marketplace-section">
             <div class="section-header">
                 <span class="badge">Local Marketplace</span>
                 <h2 class="section-title">Discover Jharkhand's Treasures</h2>
@@ -410,6 +655,7 @@
         </div>
     </section>
 
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
@@ -438,6 +684,21 @@
             });
         });
     </script>
-
+    <script>
+        document.querySelectorAll('.scroll-down-indicator').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="mute.js"></script>
+</main>
 </body>
 </html>
